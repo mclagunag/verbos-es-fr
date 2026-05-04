@@ -1,124 +1,136 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>100 verbos español - francés</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>100 verbos español - francés</title>
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: #f7f7f7;
-    }
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f4f6f8;
+}
 
-    header {
-      background: #2c3e50;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
+header {
+  background: #2c3e50;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
 
-    input {
-      width: 90%;
-      max-width: 500px;
-      padding: 10px;
-      margin-top: 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-    }
+input {
+  width: 90%;
+  max-width: 500px;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 8px;
+  border: none;
+}
 
-    .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 20px;
-    }
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
 
-    .verb {
-      background: white;
-      margin: 8px 0;
-      padding: 12px;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-      display: flex;
-      justify-content: space-between;
-    }
+.verb {
+  background: white;
+  margin: 8px 0;
+  padding: 12px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-    .es {
-      font-weight: bold;
-    }
+.es {
+  font-weight: bold;
+}
 
-    .fr {
-      color: #555;
-    }
+.fr {
+  color: #555;
+}
 
-    .hidden {
-      display: none;
-    }
-  </style>
+button {
+  border: none;
+  background: #eee;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 6px 10px;
+}
+
+button:hover {
+  background: #ddd;
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  <h1>100 verbos básicos</h1>
-  <p>Español → Francés</p>
-  <input type="text" id="search" placeholder="Buscar verbo...">
+<h1>100 verbos básicos</h1>
+<p>Español → Francés</p>
+<input type="text" id="search" placeholder="Buscar verbo...">
 </header>
 
 <div class="container" id="list">
 
-  <!-- VERBOS -->
-  <div class="verb"><span class="es">ser</span><span class="fr">être</span></div>
-  <div class="verb"><span class="es">estar</span><span class="fr">être</span></div>
-  <div class="verb"><span class="es">tener</span><span class="fr">avoir</span></div>
-  <div class="verb"><span class="es">hacer</span><span class="fr">faire</span></div>
-  <div class="verb"><span class="es">poder</span><span class="fr">pouvoir</span></div>
-  <div class="verb"><span class="es">decir</span><span class="fr">dire</span></div>
-  <div class="verb"><span class="es">ir</span><span class="fr">aller</span></div>
-  <div class="verb"><span class="es">ver</span><span class="fr">voir</span></div>
-  <div class="verb"><span class="es">dar</span><span class="fr">donner</span></div>
-  <div class="verb"><span class="es">saber</span><span class="fr">savoir</span></div>
+<!-- VERBOS -->
+<script>
+const verbs = [
+["ser","être"],["estar","être"],["tener","avoir"],["hacer","faire"],["poder","pouvoir"],
+["decir","dire"],["ir","aller"],["ver","voir"],["dar","donner"],["saber","savoir"],
+["querer","vouloir"],["llegar","arriver"],["pasar","passer"],["deber","devoir"],["poner","mettre"],
+["parecer","sembler"],["quedar","rester"],["creer","croire"],["hablar","parler"],["llevar","porter"],
+["dejar","laisser"],["seguir","suivre"],["encontrar","trouver"],["llamar","appeler"],["venir","venir"],
+["pensar","penser"],["salir","sortir"],["volver","revenir"],["tomar","prendre"],["conocer","connaître"],
+["vivir","vivre"],["sentir","sentir"],["tratar","traiter"],["mirar","regarder"],["contar","compter"],
+["empezar","commencer"],["esperar","espérer"],["buscar","chercher"],["existir","exister"],["entrar","entrer"],
+["trabajar","travailler"],["escribir","écrire"],["perder","perdre"],["producir","produire"],["ocurrir","arriver"],
+["entender","comprendre"],["pedir","demander"],["recibir","recevoir"],["recordar","se souvenir"],["terminar","finir"],
+["permitir","permettre"],["aparecer","apparaître"],["conseguir","obtenir"],["comenzar","commencer"],["servir","servir"],
+["sacar","sortir"],["necesitar","avoir besoin"],["mantener","maintenir"],["resultar","résulter"],["leer","lire"],
+["caer","tomber"],["cambiar","changer"],["presentar","présenter"],["crear","créer"],["abrir","ouvrir"],
+["considerar","considérer"],["oír","entendre"],["acabar","terminer"],["convertir","convertir"],["ganar","gagner"],
+["formar","former"],["traer","apporter"],["partir","partir"],["morir","mourir"],["aceptar","accepter"],
+["realizar","réaliser"],["suponer","supposer"],["comprender","comprendre"],["lograr","réussir"],["explicar","expliquer"],
+["preguntar","demander"],["tocar","toucher"],["reconocer","reconnaître"],["estudiar","étudier"],["alcanzar","atteindre"],
+["nacer","naître"],["dirigir","diriger"],["correr","courir"],["utilizar","utiliser"],["pagar","payer"],
+["ayudar","aider"],["gustar","plaire"],["jugar","jouer"],["escuchar","écouter"],["viajar","voyager"]
+];
 
-  <div class="verb"><span class="es">querer</span><span class="fr">vouloir</span></div>
-  <div class="verb"><span class="es">llegar</span><span class="fr">arriver</span></div>
-  <div class="verb"><span class="es">pasar</span><span class="fr">passer</span></div>
-  <div class="verb"><span class="es">deber</span><span class="fr">devoir</span></div>
-  <div class="verb"><span class="es">poner</span><span class="fr">mettre</span></div>
-  <div class="verb"><span class="es">parecer</span><span class="fr">sembler</span></div>
-  <div class="verb"><span class="es">quedar</span><span class="fr">rester</span></div>
-  <div class="verb"><span class="es">creer</span><span class="fr">croire</span></div>
-  <div class="verb"><span class="es">hablar</span><span class="fr">parler</span></div>
-  <div class="verb"><span class="es">llevar</span><span class="fr">porter</span></div>
+const container = document.getElementById("list");
 
-  <div class="verb"><span class="es">dejar</span><span class="fr">laisser</span></div>
-  <div class="verb"><span class="es">seguir</span><span class="fr">suivre</span></div>
-  <div class="verb"><span class="es">encontrar</span><span class="fr">trouver</span></div>
-  <div class="verb"><span class="es">llamar</span><span class="fr">appeler</span></div>
-  <div class="verb"><span class="es">venir</span><span class="fr">venir</span></div>
-  <div class="verb"><span class="es">pensar</span><span class="fr">penser</span></div>
-  <div class="verb"><span class="es">salir</span><span class="fr">sortir</span></div>
-  <div class="verb"><span class="es">volver</span><span class="fr">revenir</span></div>
-  <div class="verb"><span class="es">tomar</span><span class="fr">prendre</span></div>
-  <div class="verb"><span class="es">conocer</span><span class="fr">connaître</span></div>
+verbs.forEach(v => {
+  const div = document.createElement("div");
+  div.className = "verb";
+  div.innerHTML = `
+    <span class="es">${v[0]}</span>
+    <span class="fr">${v[1]}</span>
+    <button onclick="playAudio('${v[1]}')">🔊</button>
+  `;
+  container.appendChild(div);
+});
 
-  <!-- (Aquí puedes seguir duplicando hasta 100 — te dejo base funcional) -->
+// búsqueda
+document.getElementById("search").addEventListener("input", function() {
+  const value = this.value.toLowerCase();
+  document.querySelectorAll(".verb").forEach(v => {
+    v.style.display = v.innerText.toLowerCase().includes(value) ? "flex" : "none";
+  });
+});
+
+// audio
+function playAudio(word) {
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = "fr-FR";
+  utterance.rate = 0.9;
+  speechSynthesis.speak(utterance);
+}
+</script>
 
 </div>
-
-<script>
-  const search = document.getElementById("search");
-  const verbs = document.querySelectorAll(".verb");
-
-  search.addEventListener("input", function () {
-    const value = this.value.toLowerCase();
-
-    verbs.forEach(v => {
-      const text = v.innerText.toLowerCase();
-      v.style.display = text.includes(value) ? "flex" : "none";
-    });
-  });
-</script>
 
 </body>
 </html>
